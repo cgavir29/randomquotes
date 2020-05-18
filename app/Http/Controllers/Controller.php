@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Storage;
 
 class Controller extends BaseController
 {
@@ -22,5 +23,12 @@ class Controller extends BaseController
         $randomQuote = Controller::$quotes[$randomNumber];
 
         return response()->json(['quote' => $randomQuote, 'server_ip' => gethostbyname(gethostname())]);
+    }
+
+    public function randomImages()
+    {
+        $images = Storage::disk('s3')->files('images');
+
+        return response()->json(['images' => $images, 'server_ip' => gethostbyname(gethostname())]);
     }
 }
