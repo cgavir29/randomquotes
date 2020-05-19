@@ -27,10 +27,11 @@ class Controller extends BaseController
 
     public function randomImages()
     {
+        $url = 'https://random-quotes.s3.amazonaws.com/';
         $images = Storage::disk('s3')->files('images');
         $totalImages = count($images);
         $randomNumber = rand(0, ($totalImages - 1));
-        $randomImage = $images[$randomNumber];
+        $randomImage = $url . $images[$randomNumber];
 
         $data = [];
         $data['image'] = $randomImage;
