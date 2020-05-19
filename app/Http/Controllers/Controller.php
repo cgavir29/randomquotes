@@ -36,6 +36,6 @@ class Controller extends BaseController
         $data['image'] = $randomImage;
         $data['server_ip'] = gethostbyname(gethostname());
 
-        return view('randomImages', ['data' => $data]);
+        return view('randomImages')->with('data', $data);
     }
 }
