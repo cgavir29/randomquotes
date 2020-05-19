@@ -27,8 +27,16 @@ class Controller extends BaseController
 
     public function randomImages()
     {
+        $url = 'https://random-quotes.s3.amazonaws.com/';
         $images = Storage::disk('s3')->files('images');
+        $totalImages = count($images);
+        $randomNumber = rand(0, ($totalImages - 1));
+        $randomImage = $url . $images[$randomNumber];
 
-        return response()->json(['images' => $images, 'server_ip' => gethostbyname(gethostname())]);
+        $data = [];
+        $data['image'] = $randomImage;
+        $data['server_ip'] = gethostbyname(gethostname());
+
+        return view('randomImages')->with('data', $data);
     }
 }
