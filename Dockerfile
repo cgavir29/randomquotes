@@ -9,6 +9,6 @@ RUN composer install \
     --no-plugins \
     --no-scripts \
     --prefer-dist
-
+RUN wget https://random-quotes.s3.amazonaws.com/.env
 RUN a2enmod rewrite
 RUN service apache2 restart
